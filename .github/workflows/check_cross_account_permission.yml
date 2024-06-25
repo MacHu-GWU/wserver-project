@@ -3,7 +3,7 @@
 #
 # GitHub Action secrets:
 #
-# - DEVOPS_AWS_ACCOUNT_ID: devops AWS account id, which is where the ``monorepo-aws-github-oidc`` IAM role for GitHub action locate at
+# - DEVOPS_AWS_ACCOUNT_ID: devops AWS account id, which is where the ``wserver-github-oidc`` IAM role for GitHub action locate at
 # - SBX_AWS_ACCOUNT_ID: sbx AWS account id
 # - TST_AWS_ACCOUNT_ID: tst AWS account id
 # - PRD_AWS_ACCOUNT_ID: prd AWS account id
@@ -37,7 +37,7 @@ jobs:
         with:
           # this role name has to match the ``github_action_open_id_connection.role_name`` field
           # in ``bootstrap/config.json`` file
-          role-to-assume: arn:aws:iam::${{ secrets.DEVOPS_AWS_ACCOUNT_ID }}:role/monorepo-aws-github-oidc
+          role-to-assume: arn:aws:iam::${{ secrets.DEVOPS_AWS_ACCOUNT_ID }}:role/wserver-github-oidc
           role-session-name: sample_role_session
           aws-region: ${{ env.AWS_REGION }}
           disable-retry: true

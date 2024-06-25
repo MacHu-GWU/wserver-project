@@ -22,17 +22,17 @@ workload_bsm_list = [
     bsm_prd,
 ]
 
-sbx_res_name = f"monorepo-aws-sbx-deployer-{bsm_sbx.aws_region}"
-tst_res_name = f"monorepo-aws-tst-deployer-{bsm_sbx.aws_region}"
-prd_res_name = f"monorepo-aws-prd-deployer-{bsm_sbx.aws_region}"
+sbx_res_name = f"wserver-sbx-deployer-{bsm_sbx.aws_region}"
+tst_res_name = f"wserver-tst-deployer-{bsm_sbx.aws_region}"
+prd_res_name = f"wserver-prd-deployer-{bsm_sbx.aws_region}"
 
 workload_account_iam_policy_document = {
     "Version": "2012-10-17",
     "Statement": [{"Effect": "Allow", "Action": "*", "Resource": "*"}],
 }
 
-devops_role_name = "monorepo-aws-github-oidc"
-devops_stack_name = "monorepo-aws-devops-deployer-us-east-1"
+devops_role_name = "wserver-github-oidc"
+devops_stack_name = "wserver-devops-deployer-us-east-1"
 devops_policy_name = "wserver-devops-us-east-1"
 
 artifacts_s3_bucket = "bmt-app-devops-us-east-1-artifacts"
