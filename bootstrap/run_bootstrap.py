@@ -16,8 +16,8 @@ github_repo = f"{project_name}-project"
 # define multi aws account setup
 devops_aws_profile = "bmt_app_devops_us_east_1"
 sbx_aws_profile = "bmt_app_dev_us_east_1"
-tst_aws_profile = "bmt_app_test_us_east_1"
-prd_aws_profile = "bmt_app_prod_us_east_1"
+tst_aws_profile = "bmt_app_dev_us_east_1"
+prd_aws_profile = "bmt_app_dev_us_east_1"
 
 # make sure the order of environment name is aligned
 workload_env_list = [
