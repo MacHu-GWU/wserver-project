@@ -31,14 +31,6 @@ workload_aws_profile_list = [
     prd_aws_profile,
 ]
 
-# read github personal access token from file
-github_pac = (
-    Path.home()
-    .joinpath(".github", "pac", "MacHu-GWU-Full-Repo-Access.txt")
-    .read_text()
-    .strip()
-)
-
 # --------------------------------------------------------------------------
 # Don't touch the code below until ``Run bootstrap scripts``
 # --------------------------------------------------------------------------
@@ -54,6 +46,14 @@ def get_iam_resource_name(
 
 
 if __name__ == "__main__":
+    # read github personal access token from file
+    github_pac = (
+        Path.home()
+        .joinpath(".github", "pac", "MacHu-GWU-Full-Repo-Access.txt")
+        .read_text()
+        .strip()
+    )
+    
     bsm_devops = BotoSesManager(profile_name=devops_aws_profile)
 
     workload_bsm_list = [
