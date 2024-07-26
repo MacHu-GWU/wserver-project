@@ -9,7 +9,7 @@ from aws_cdk import (
 )
 
 from ...config.define.server import Server
-from ...boto_ses import bsm
+from ...boto_ses import boto_ses_factory
 
 if T.TYPE_CHECKING:  # pragma: no cover
     from .main import MainStack
@@ -92,8 +92,8 @@ class VpcMixin:
             ("world", "tpc", ec2.Port.tcp(WORLD_SERVER_PORT)),
             ("world", "udp", ec2.Port.udp(WORLD_SERVER_PORT)),
         ]
-        print(f"{self.env.s3path_ip_white_list_json.uri = }")
-        bsm.print_who_am_i()
+
+        bsm = boto_ses_factory.get_env_bsm(env_name=boto_ses_factory.get_current_env())
         ip_white_list = json.loads(self.env.s3path_ip_white_list_json.read_text(bsm=bsm))
 
         for auth_name, protocol, connection in args:
@@ -145,6 +145,7 @@ class VpcMixin:
         self.sg_output_list_ssh.append(output_sg_ssh_id)
 
         # grant specific IP to SSH to this server
+        bsm = boto_ses_factory.get_env_bsm(env_name=boto_ses_factory.get_current_env())
         ip_white_list = json.loads(self.env.s3path_ip_white_list_json.read_text(bsm=bsm))
 
         for ip in (ip_white_list + self.env.ssh_allowed_ips):
