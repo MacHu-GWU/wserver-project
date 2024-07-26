@@ -1,6 +1,6 @@
 Welcome to ``wserver_infra`` Documentation
 ==============================================================================
-This is a sample project that demonstrates the best practices for a production ready AWS CDK project. It is also a project template can be used to create more project like "this".
+这个项目负责部署 wserver 项目的 AWS infrastructure resource. 主要是一些网络资源, 例如 IAM Role, Security Group, DB Subnet Group 等.
 
 For first time user, please run the following command to build project documentation website and read it::
 

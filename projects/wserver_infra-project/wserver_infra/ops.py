@@ -86,21 +86,6 @@ def deploy_config(check: bool = True):
         url=simple_cdk_project.google_sheet_url,
     )
 
-    # put ip white list to aws s3, this can only be done from the admin's local laptop
-    for env_name in [
-        EnvNameEnum.sbx.value,
-        EnvNameEnum.tst.value,
-        EnvNameEnum.prd.value,
-    ]:
-        env = config.get_env(env_name)
-        logger.info(f"Put {env_name} ip white list json to: {env.s3path_ip_white_list_json.uri}")
-        with logger.indent():
-            logger.info(f"Preview at ip white list json to: {env.s3path_ip_white_list_json.console_url}")
-        put_ip_white_list(
-            env=env,
-            bsm=boto_ses_factory.get_env_bsm(env_name),
-        )
-
 
 def run_unit_test(check: bool = True):
     simple_python_project.run_unit_test(
@@ -203,6 +188,23 @@ def deploy_app(
     check: bool = True,
 ):
     env_name = detect_current_env()
+
+    # put ip white list to aws s3, this can only be done from the admin's local laptop
+    if runtime.is_local_runtime_group:
+        for env_name in [
+            EnvNameEnum.sbx.value,
+            EnvNameEnum.tst.value,
+            EnvNameEnum.prd.value,
+        ]:
+            env = config.get_env(env_name)
+            logger.info(f"Put {env_name} ip white list json to: {env.s3path_ip_white_list_json.uri}")
+            with logger.indent():
+                logger.info(f"Preview at ip white list json to: {env.s3path_ip_white_list_json.console_url}")
+            put_ip_white_list(
+                env=env,
+                bsm=boto_ses_factory.get_env_bsm(env_name),
+            )
+
     if runtime.is_local:
         skip_prompt = False
     else:
