@@ -5,24 +5,79 @@
         // ---------------------------------------------------------------------
         "*.project_name": "wserver_infra",
         "*.s3uri_artifacts": "s3://bmt-app-devops-us-east-1-artifacts/projects/wserver/wserver_infra/",
-        "*.s3uri_docs": "s3://bmt-app-devops-us-east-1-doc-host/projects/wserver/"
+        "*.s3uri_docs": "s3://bmt-app-devops-us-east-1-doc-host/projects/wserver/",
+        "*.s3uri_acore_server_config": "s3://bmt-app-dev-us-east-1-artifacts/projects/acore_server_config/",
         // ---------------------------------------------------------------------
         // Application related
         //
         // note that if a json node been set by two expression multiple times,
         // the first one will be used
         // ---------------------------------------------------------------------
+        "*.vpc_id": "vpc-0ceac1b42a807e2f8",
+        "*.availability_zones": [
+            "us-east-1a",
+            "us-east-1b",
+            "us-east-1c"
+        ],
+        // server subnet has to be public subnets
+        "*.server_subnet_ids": [
+            "subnet-03612e5c300084748",
+            "subnet-0d21c9978c5c26d65",
+            "subnet-0d1d852f22356e870"
+        ],
+        // db subnet has to be private subnets
+        "*.db_subnet_ids": [
+            "subnet-05cbe90731be8f76f",
+            "subnet-0313ea632cf2112fa",
+            "subnet-02d27c72fa571fbe7"
+        ],
+        "*.ssh_allowed_ips": [
+        ],
+        "*.servers.*.play_allowed_ips": [
+        ]
     },
     "devops": {
-        "s3uri_data": "s3://bmt-app-devops-us-east-1-data/projects/wserver/wserver_infra/"
+        "s3uri_data": "s3://bmt-app-devops-us-east-1-data/projects/wserver/wserver_infra/",
+        "servers": {
+            "blue": {},
+            "green": {},
+            "black": {},
+            "white": {},
+            "yellow": {},
+            "orange": {}
+        }
     },
     "sbx": {
-        "s3uri_data": "s3://bmt-app-dev-us-east-1-data/projects/wserver/wserver_infra/"
+        "s3uri_data": "s3://bmt-app-dev-us-east-1-data/projects/wserver/wserver_infra/",
+        "servers": {
+            "blue": {},
+            "green": {},
+            "black": {},
+            "white": {},
+            "yellow": {},
+            "orange": {}
+        }
     },
     "tst": {
-        "s3uri_data": "s3://bmt-app-test-us-east-1-data/projects/wserver/wserver_infra/"
+        "s3uri_data": "s3://bmt-app-dev-us-east-1-data/projects/wserver/wserver_infra/",
+        "servers": {
+            "blue": {},
+            "green": {},
+            "black": {},
+            "white": {},
+            "yellow": {},
+            "orange": {}
+        }
     },
     "prd": {
-        "s3uri_data": "s3://bmt-app-prod-us-east-1-data/projects/wserver/wserver_infra/"
+        "s3uri_data": "s3://bmt-app-dev-us-east-1-data/projects/wserver/wserver_infra/",
+        "servers": {
+            "blue": {},
+            "green": {},
+            "black": {},
+            "white": {},
+            "yellow": {},
+            "orange": {}
+        }
     }
 }

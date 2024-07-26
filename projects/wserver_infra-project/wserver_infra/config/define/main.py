@@ -9,6 +9,7 @@ from ..._api import EnvNameEnum, detect_current_env
 # You may have a long list of config field definition
 # put them in different module and use Mixin class
 from .app import AppMixin
+from .server import Server, ServerMixin
 
 
 # inherit order matters, typically, you want to use your own Mixin class
@@ -17,10 +18,21 @@ from .app import AppMixin
 @dataclasses.dataclass
 class Env(
     AppMixin,
+    ServerMixin,
     aws_ops_alpha.BaseEnv,
 ):
     @classmethod
     def from_dict(cls, data: dict):
+        data["servers"] = {
+            name: Server(
+                id="{}-{}".format(
+                    data["env_name"],
+                    name,
+                ),
+                **dct,
+            )
+            for name, dct in data.get("servers", {}).items()
+        }
         return cls(**data)
 
 

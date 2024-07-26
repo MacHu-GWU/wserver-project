@@ -11,9 +11,10 @@ from .vendor.import_agent import aws_ops_alpha
 
 # modules from this project
 from ._version import __version__
-from .config.api import Config, Env, config
+from .config.api import Config, Env, config, put_ip_white_list
 from ._api import (
     paths,
+    logger,
     runtime,
     git_repo,
     EnvNameEnum,
@@ -84,6 +85,21 @@ def deploy_config(check: bool = True):
         truth_table=simple_cdk_project.truth_table,
         url=simple_cdk_project.google_sheet_url,
     )
+
+    # put ip white list to aws s3, this can only be done from the admin's local laptop
+    for env_name in [
+        EnvNameEnum.sbx.value,
+        EnvNameEnum.tst.value,
+        EnvNameEnum.prd.value,
+    ]:
+        env = config.get_env(env_name)
+        logger.info(f"Put {env_name} ip white list json to: {env.s3path_ip_white_list_json.uri}")
+        with logger.indent():
+            logger.info(f"Preview at ip white list json to: {env.s3path_ip_white_list_json.console_url}")
+        put_ip_white_list(
+            env=env,
+            bsm=boto_ses_factory.get_env_bsm(env_name),
+        )
 
 
 def run_unit_test(check: bool = True):

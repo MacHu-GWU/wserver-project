@@ -6,3 +6,4 @@ from .define.api import Config
 from .load import smart_load
 from .load import config
 from .backup import smart_backup
+from .ip_white_list import put_ip_white_list
