@@ -192,6 +192,7 @@ def deploy_app(
     # put ip white list to aws s3, this can only be done from the admin's local laptop
     if runtime.is_local_runtime_group:
         for env_name in [
+            EnvNameEnum.devops.value,
             EnvNameEnum.sbx.value,
             EnvNameEnum.tst.value,
             EnvNameEnum.prd.value,
