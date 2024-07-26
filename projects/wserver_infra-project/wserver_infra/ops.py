@@ -187,6 +187,9 @@ def view_latest_doc():
 def deploy_app(
     check: bool = True,
 ):
+    """
+    Deploy the CDK stack.
+    """
     env_name = detect_current_env()
 
     # put ip white list to aws s3, this can only be done from the admin's local laptop

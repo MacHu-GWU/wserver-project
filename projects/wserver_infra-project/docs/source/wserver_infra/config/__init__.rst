@@ -13,5 +13,6 @@ sub packages and modules
     define <define/__init__>
     api <api>
     backup <backup>
+    ip_white_list <ip_white_list>
     load <load>
     

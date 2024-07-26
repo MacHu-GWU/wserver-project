@@ -92,7 +92,8 @@ class VpcMixin:
             ("world", "tpc", ec2.Port.tcp(WORLD_SERVER_PORT)),
             ("world", "udp", ec2.Port.udp(WORLD_SERVER_PORT)),
         ]
-
+        print(f"{self.env.s3path_ip_white_list_json.uri = }")
+        bsm.print_who_am_i()
         ip_white_list = json.loads(self.env.s3path_ip_white_list_json.read_text(bsm=bsm))
 
         for auth_name, protocol, connection in args:
@@ -106,7 +107,7 @@ class VpcMixin:
                 )
             else:
                 # grant specific IP to play on this server
-                for ip in server.play_allowed_ips:
+                for ip in play_allowed_ips:
                     sg_ec2.add_ingress_rule(
                         peer=ec2.Peer.ipv4(f"{ip}/32"),
                         connection=connection,

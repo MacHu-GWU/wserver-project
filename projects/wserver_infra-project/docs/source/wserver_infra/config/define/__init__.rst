@@ -13,4 +13,5 @@ sub packages and modules
     api <api>
     app <app>
     main <main>
+    server <server>
     

@@ -12,4 +12,6 @@ sub packages and modules
 
     iam <iam>
     main <main>
+    rds <rds>
+    vpc <vpc>
     

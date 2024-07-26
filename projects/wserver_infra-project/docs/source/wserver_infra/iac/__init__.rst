@@ -12,4 +12,5 @@ sub packages and modules
 
     define <define/__init__>
     exports <exports>
+    ip_white_list <ip_white_list>
     
