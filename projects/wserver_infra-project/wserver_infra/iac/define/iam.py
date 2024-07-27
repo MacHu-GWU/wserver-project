@@ -31,6 +31,12 @@ class IamMixin:
             ],
         )
 
+        self.stat_iam_list_account_allias = iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=["iam:ListAccountAliases"],
+            resources=["*"],
+        )
+
         # read from certain S3 bucket
         self.stat_s3_bucket_get_versioning = iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
@@ -54,6 +60,7 @@ class IamMixin:
             resources=[
                 f"arn:aws:s3:::{self.env.s3dir_data.bucket}",
                 f"arn:aws:s3:::{self.env.s3dir_data.bucket}/{self.env.s3dir_data.key}*",
+                f"arn:aws:s3:::{self.env.s3dir_data.bucket}/projects/acore_*",
                 f"arn:aws:s3:::{self.env.s3dir_acore_server_config.bucket}",
                 f"arn:aws:s3:::{self.env.s3dir_acore_server_config.bucket}/{self.env.s3dir_acore_server_config.key}*",
             ],
@@ -98,11 +105,10 @@ class IamMixin:
 
         self.stat_dynamodb = iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
-            actions=[
-				"dynamodb:PutItem",
-				"dynamodb:DescribeTable"
+            actions=["dynamodb:PutItem", "dynamodb:DescribeTable"],
+            resources=[
+                f"arn:aws:dynamodb:{aws_cdk.Aws.REGION}:{aws_cdk.Aws.ACCOUNT_ID}:table/{self.env.dynamodb_table_name_prefix}*"
             ],
-            resources=[f"arn:aws:dynamodb:{aws_cdk.Aws.REGION}:{aws_cdk.Aws.ACCOUNT_ID}:table/{self.env.dynamodb_table_name_prefix}*"],
         )
 
         # declare iam role
@@ -127,6 +133,9 @@ class IamMixin:
                     statements=[
                         # EC2 instance need to get parameter from parameter store
                         self.stat_parameter_store,
+                        # EC2 instance need to get account alias
+                        self.stat_iam_list_account_allias,
+                        # EC2 instance need to check if the config s3 bucket turned version on
                         self.stat_s3_bucket_get_versioning,
                         self.stat_s3_bucket_read,
                         self.stat_s3_bucket_write,
