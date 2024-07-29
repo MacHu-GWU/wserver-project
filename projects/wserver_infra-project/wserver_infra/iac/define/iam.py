@@ -77,6 +77,7 @@ class IamMixin:
             resources=[
                 f"arn:aws:s3:::{self.env.s3dir_data.bucket}",
                 f"arn:aws:s3:::{self.env.s3dir_data.bucket}/{self.env.s3dir_data.key}*",
+                f"arn:aws:s3:::{self.env.s3dir_data.bucket}/projects/acore_*",
             ],
         )
 
