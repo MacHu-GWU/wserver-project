@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import pynamodb_mate.api as pm
-import acore_server_monitoring_core.api as acore_server_monitoring_core
+import acore_server_monitoring_measurement.api as acore_server_monitoring_measurement
 
 from .config.load import config
 
 
-class Ec2RdsStatusMeasurement(acore_server_monitoring_core.Ec2RdsStatusMeasurement):
+class Ec2RdsStatusMeasurement(acore_server_monitoring_measurement.Ec2RdsStatusMeasurement):
     class Meta:
         table_name = config.env.measurement_dynamodb_table_name
         region = "us-east-1"

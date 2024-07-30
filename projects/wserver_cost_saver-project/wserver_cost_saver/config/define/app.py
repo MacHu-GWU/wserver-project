@@ -15,6 +15,7 @@ if T.TYPE_CHECKING:  # pragma: no cover
 class AppMixin:
     username: T.Optional[str] = dataclasses.field(default=None)
     password: T.Optional[str] = dataclasses.field(default=None)
+    server_list: T.List[str] = dataclasses.field(default_factory=list)
 
     @property
     def s3dir_source(self: "Env") -> S3Path:
@@ -23,6 +24,10 @@ class AppMixin:
     @property
     def s3dir_target(self: "Env") -> S3Path:
         return self.s3dir_env_data.joinpath("target").to_dir()
+
+    @property
+    def server_id_list(self: "Env") -> T.List[str]:
+        return [f"{self.env_name}-{name}" for name in self.server_list]
 
     @property
     def env_vars(self: "Env") -> T.Dict[str, str]:

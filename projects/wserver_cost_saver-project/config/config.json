@@ -41,6 +41,12 @@
     "sbx": {
         "username": "sbx.user",
         "s3uri_data": "s3://bmt-app-dev-us-east-1-data/projects/wserver_cost_saver/",
+        "server_list": [
+            "blue",
+            "green",
+            "black",
+            "white"
+        ],
         "lambda_functions": {
             "hello": {},
             "s3sync": {}
@@ -49,6 +55,12 @@
     "tst": {
         "username": "tst.user",
         "s3uri_data": "s3://bmt-app-test-us-east-1-data/projects/wserver_cost_saver/",
+        "server_list": [
+            "blue",
+            "green",
+            "black",
+            "white"
+        ],
         "lambda_functions": {
             "hello": {},
             "s3sync": {}
@@ -57,6 +69,12 @@
     "prd": {
         "username": "prd.user",
         "s3uri_data": "s3://bmt-app-prod-us-east-1-data/projects/wserver_cost_saver/",
+        "server_list": [
+            "blue",
+            "green",
+            "black",
+            "white"
+        ],
         "lambda_functions": {
             "hello": {
             },

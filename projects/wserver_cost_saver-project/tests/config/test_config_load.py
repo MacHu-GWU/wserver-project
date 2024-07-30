@@ -13,8 +13,10 @@ def test():
     _ = config.env.username
     _ = config.env.password
     _ = config.env.s3uri_data
+    _ = config.env.server_list
 
     _ = config.env.s3dir_data
+    _ = config.env.server_id_list
     _ = config.env.s3dir_source
     _ = config.env.s3dir_target
     _ = config.env.env_vars
