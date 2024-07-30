@@ -34,7 +34,8 @@
         "*.lambda_functions.*.live_version2": null,
         "*.lambda_functions.*.live_version2_percentage": null,
         "*.lambda_functions.hello.handler": "hello_handler",
-        "*.lambda_functions.s3sync.handler": "s3sync_handler"
+        "*.lambda_functions.s3sync.handler": "s3sync_handler",
+        "*.lambda_functions.telemetry.handler": "telemetry_handler"
     },
     "devops": {
         "s3uri_data": "s3://bmt-app-devops-us-east-1-data/projects/wserver_cost_saver/"

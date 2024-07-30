@@ -149,3 +149,7 @@ class LambdaFunctionMixin:
     @property
     def lbd_s3sync(self) -> LambdaFunction:
         return self.lambda_functions["s3sync"]
+
+    @property
+    def lbd_telemetry(self) -> LambdaFunction:
+        return self.lambda_functions["telemetry"]
