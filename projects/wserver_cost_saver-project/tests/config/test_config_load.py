@@ -66,6 +66,7 @@ def test():
 
     # name.py
     _ = config.env.cloudformation_stack_name
+    _ = config.env.measurement_dynamodb_table_name
 
 
 if __name__ == "__main__":

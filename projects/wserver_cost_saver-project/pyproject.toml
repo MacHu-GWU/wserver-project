@@ -44,8 +44,6 @@ config_patterns = "1.0.6"
 aws_console_url = "1.4.1"
 # build AWS lambda layer and deployment package
 aws_lambda_layer = "0.5.1"
-# build AWS Glue artifact
-aws_glue_artifact = "0.2.1"
 # AWS devops best practices
 #aws_ops_alpha = "0.1.1"
 # ------------------------------------------------------------------------------
@@ -55,6 +53,11 @@ aws_glue_artifact = "0.2.1"
 aws_lambda_event = "2.0.2"
 # helper functions
 boltons = "21.0.0"
+# ------------------------------------------------------------------------------
+# acore libraries
+# ------------------------------------------------------------------------------
+acore_server_monitoring_measurement = "0.2.1"
+polars = "1.0.0"
 
 # ------------------------------------------------------------------------------
 # addtitional dependencies for development
