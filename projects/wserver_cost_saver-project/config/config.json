@@ -17,7 +17,8 @@
         // ---------------------------------------------------------------------
         "*.lambda_functions": {
             "hello": {},
-            "s3sync": {}
+            "s3sync": {},
+            "telemetry": {}
         },
         "*.lambda_functions.*.layers": [
             "1"
@@ -49,7 +50,8 @@
         ],
         "lambda_functions": {
             "hello": {},
-            "s3sync": {}
+            "s3sync": {},
+            "telemetry": {}
         }
     },
     "tst": {
@@ -63,7 +65,8 @@
         ],
         "lambda_functions": {
             "hello": {},
-            "s3sync": {}
+            "s3sync": {},
+            "telemetry": {}
         }
     },
     "prd": {
@@ -76,10 +79,9 @@
             "white"
         ],
         "lambda_functions": {
-            "hello": {
-            },
-            "s3sync": {
-            }
+            "hello": {},
+            "s3sync": {},
+            "telemetry": {}
         }
     }
 }

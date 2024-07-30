@@ -57,6 +57,44 @@ class IamMixin:
             ],
         )
 
+        self.stat_dynamodb = iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=[
+                "dynamodb:DescribeTable",
+                "dynamodb:PutItem",
+                "dynamodb:Query",
+            ],
+            resources=[
+                f"arn:aws:dynamodb:{cdk.Aws.REGION}:{cdk.Aws.ACCOUNT_ID}:table/{self.env.measurement_dynamodb_table_name}",
+            ],
+        )
+
+        self.stat_list_start_stop_computational_resources = iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=[
+                # ec2 stuff
+                "ec2:DescribeInstances",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances",
+                # rds stuff
+                "rds:DescribeDBInstances",
+                "rds:StartDBInstance",
+                "rds:StopDBInstance",
+                "rds:StopDBInstance",
+                "rds:DeleteDBInstance",
+                # ssm run command stuff
+                "ssm:SendCommand",
+                "ssm:GetCommandInvocation",
+            ],
+            resources=[
+                "*",
+            ],
+            conditions={
+                "StringEquals": {"aws:ResourceTag/wserver:env_name": self.env.env_name}
+            },
+        )
+
         # declare iam role
         self.iam_role_for_lambda = iam.Role(
             self,
@@ -74,6 +112,8 @@ class IamMixin:
                         self.stat_parameter_store,
                         self.stat_s3_bucket_read,
                         self.stat_s3_bucket_write,
+                        self.stat_dynamodb,
+                        self.stat_list_start_stop_computational_resources,
                     ]
                 )
             },
