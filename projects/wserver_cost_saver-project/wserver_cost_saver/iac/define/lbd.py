@@ -7,6 +7,8 @@ from aws_cdk import (
     aws_iam as iam,
     aws_s3 as s3,
     aws_s3_notifications as s3_notifications,
+    aws_events as events,
+    aws_events_targets as events_targets,
     aws_lambda as lambda_,
 )
 
@@ -185,6 +187,31 @@ class LambdaMixin:
             s3.NotificationKeyFilter(
                 prefix=f"{self.env.s3dir_source.key}",
             ),
+        )
+
+        # ----------------------------------------------------------------------
+        # Configure Event Rule
+        # ----------------------------------------------------------------------
+        lbd_func_telemetry_alias: lambda_.Alias = self.lambda_func_mapper[self.env.lbd_telemetry.name][
+            KEY_ALIAS]
+
+        if self.env.env_name == "sbx":
+            lbd_func_telemetry_event_enabled = True
+        else:
+            lbd_func_telemetry_event_enabled = False
+
+        self.lbd_func_telemetry_event = events.Rule(
+            self,
+            id=f"LambdaFunc{self.env.lbd_telemetry.short_name_camel}Event",
+            rule_name=f"{self.env.prefix_name_snake}-{self.env.lbd_telemetry.short_name_snake}",
+            description="run the telemetry lambda function every 5 minutes",
+            enabled=lbd_func_telemetry_event_enabled,
+            schedule=events.Schedule.rate(duration=cdk.Duration.minutes(5)),
+            targets=[
+                events_targets.LambdaFunction(
+                    handler=lbd_func_telemetry_alias,
+                ),
+            ],
         )
 
         # add custom resource tags to Lambda Function

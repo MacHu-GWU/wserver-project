@@ -61,7 +61,7 @@ class IamMixin:
             effect=iam.Effect.ALLOW,
             actions=[
                 "dynamodb:DescribeTable",
-                "dynamodb:PutItem",
+                "dynamodb:BatchWriteItem",
                 "dynamodb:Query",
             ],
             resources=[
@@ -69,16 +69,25 @@ class IamMixin:
             ],
         )
 
-        self.stat_list_start_stop_computational_resources = iam.PolicyStatement(
+        self.stat_list_resources = iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            actions=[
+                "ec2:DescribeInstances",
+                "rds:DescribeDBInstances",
+            ],
+            resources=[
+                "*",
+            ],
+        )
+
+        self.stat_start_stop_delete_computational_resources = iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
             actions=[
                 # ec2 stuff
-                "ec2:DescribeInstances",
                 "ec2:StartInstances",
                 "ec2:StopInstances",
                 "ec2:TerminateInstances",
                 # rds stuff
-                "rds:DescribeDBInstances",
                 "rds:StartDBInstance",
                 "rds:StopDBInstance",
                 "rds:StopDBInstance",
@@ -113,7 +122,8 @@ class IamMixin:
                         self.stat_s3_bucket_read,
                         self.stat_s3_bucket_write,
                         self.stat_dynamodb,
-                        self.stat_list_start_stop_computational_resources,
+                        self.stat_list_resources,
+                        self.stat_start_stop_delete_computational_resources,
                     ]
                 )
             },

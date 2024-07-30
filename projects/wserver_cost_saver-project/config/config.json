@@ -24,7 +24,7 @@
             "1"
         ],
         "*.lambda_functions.s3sync.timeout": 60,
-        "*.lambda_functions.*.timeout": 3,
+        "*.lambda_functions.*.timeout": 10,
         "*.lambda_functions.*.memory": 128,
         "*.lambda_functions.*.iam_role": null,
         "*.lambda_functions.*.subnet_ids": null,
