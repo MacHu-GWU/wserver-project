@@ -106,9 +106,13 @@ class IamMixin:
 
         self.stat_dynamodb = iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
-            actions=["dynamodb:PutItem", "dynamodb:DescribeTable"],
+            actions=[
+                "dynamodb:PutItem",
+                "dynamodb:DescribeTable",
+            ],
             resources=[
-                f"arn:aws:dynamodb:{aws_cdk.Aws.REGION}:{aws_cdk.Aws.ACCOUNT_ID}:table/{self.env.dynamodb_table_name_prefix}*"
+                f"arn:aws:dynamodb:{aws_cdk.Aws.REGION}:{aws_cdk.Aws.ACCOUNT_ID}:table/{self.env.dynamodb_table_name_prefix}*",
+                f"arn:aws:dynamodb:{aws_cdk.Aws.REGION}:{aws_cdk.Aws.ACCOUNT_ID}:table/acore_*",
             ],
         )
 
